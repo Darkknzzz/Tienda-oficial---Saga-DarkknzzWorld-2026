@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DarkknzzWorld | Tienda Oficial</title>
+    <style>
+        :root { --acua: #00ffcc; --red: #ff3333; --gold: #ffd700; --dark-red: #8b0000; }
+        body { margin: 0; background-color: #050505; color: white; font-family: 'Arial', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
+        
+        header {
+            height: 400px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 60%, #050505), url('1000619441.jpg');
+            background-size: contain; background-position: center; background-repeat: no-repeat;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            border-bottom: 4px solid var(--acua);
+        }
+
+        .main-wrapper {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('fondo_oscuro.jpg');
+            background-size: contain; background-repeat: repeat; background-attachment: scroll;
+            padding-bottom: 100px;
+        }
+
+        .section-title { text-align: center; color: var(--acua); font-size: 2.5rem; padding: 60px 0 20px; text-transform: uppercase; text-shadow: 0 0 15px var(--acua); }
+        .row { display: flex; align-items: center; justify-content: space-around; padding: 40px 10%; flex-wrap: wrap; }
+        .reverse { flex-direction: row-reverse; }
+
+        .circle {
+            width: 210px; height: 210px; border-radius: 50%; background: rgba(15,15,15,0.95);
+            border: 4px solid var(--acua); display: flex; flex-direction: column; align-items: center; 
+            justify-content: center; box-shadow: 0 0 25px var(--acua); position: relative;
+            animation: float 4s infinite ease-in-out;
+        }
+
+        .circle-large { width: 260px; height: 260px; animation: float-intense 3s infinite ease-in-out; border-width: 6px; }
+
+        .circle::before {
+            content: ''; position: absolute; width: 115%; height: 115%;
+            border-radius: 50%; border: 2px dashed var(--acua); animation: rotate 15s linear infinite;
+        }
+
+        .item-img { width: 110px; height: 110px; object-fit: contain; z-index: 5; }
+        .price { background: var(--red); padding: 5px 15px; border-radius: 20px; font-weight: bold; margin-top: 10px; z-index: 5; box-shadow: 0 0 10px var(--red); }
+        
+        .btn { 
+            background: var(--acua); color: black; padding: 12px 30px; text-decoration: none; 
+            font-weight: bold; border-radius: 25px; display: inline-block; margin-top: 15px; cursor: pointer; border: none;
+            transition: 0.3s;
+        }
+        .btn:hover { transform: scale(1.1); box-shadow: 0 0 20px var(--acua); }
+
+        .offer-box {
+            background: rgba(10,10,10,0.95); border: 3px solid var(--gold);
+            padding: 50px; border-radius: 25px; text-align: center; width: 70%; margin: 40px auto;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+        }
+
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 9999; align-items: center; justify-content: center;
+        }
+        .modal-content {
+            background: #111; border: 3px solid var(--acua); padding: 40px; border-radius: 20px;
+            text-align: center; max-width: 400px; position: relative; box-shadow: 0 0 50px var(--acua);
+        }
+
+        footer { background: #000; padding: 60px; text-align: center; border-top: 2px solid #222; }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @keyframes float-intense { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-40px) scale(1.05); } }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 style="font-size: 4rem; margin: 0; text-shadow: 0 0 20px black;">DARKKNZZWORLD</h1>
+        <p style="letter-spacing: 5px; font-weight: bold;">LA SAGA CONTINÚA</p>
+    </header>
+
+    <div class="main-wrapper">
+        <h2 class="section-title">EQUIPAMIENTO ÉLITE</h2>
+        <div class="row">
+            <div class="circle" style="border-color: var(--red);">
+                <img src="kit_sangriento.png" class="item-img">
+                <span class="price">$6.499 ARS</span>
+            </div>
+            <div style="max-width: 400px;">
+                <h2 style="color: var(--red);">KIT SANGRIENTO</h2>
+                <p>El kit más poderoso para la guerra absoluta.</p>
+                <button class="btn" onclick="openModal('sangre', 6499)">INSPECCIONAR</button>
+            </div>
+        </div>
+
+        <h2 class="section-title">CÓDIGOS DE VALOR</h2>
+        <div class="row">
+            <div class="circle"><img src="libro_encantado.png" class="item-img"><span class="price">$5.999 ARS</span></div>
+            <div style="max-width: 350px;"><h3>CÓDIGO LIBRE 1</h3><button class="btn" onclick="openModal('pago', 5999)">INSPECCIONAR</button></div>
+        </div>
+        <div class="row reverse">
+            <div class="circle" style="border-color: var(--gold);">
+                <img src="libro_encantado.png" class="item-img">
+                <span class="price" style="background: var(--red);">X4 VALOR</span>
+                <span class="price">$8.199 ARS</span>
+            </div>
+            <div style="max-width: 350px; text-align:right;">
+                <h3 style="color: var(--gold);">CÓDIGO DARKKZZZ</h3>
+                <button class="btn" onclick="openModal('pago', 8199)">INSPECCIONAR</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="circle">
+                <img src="libro_encantado.png" class="item-img">
+                <span class="price" style="background: var(--red);">X6 VALOR</span>
+                <span class="price">$11.999 ARS</span>
+            </div>
+            <div style="max-width: 350px;">
+                <h3>CÓDIGO LIBRE 2</h3>
+                <button class="btn" onclick="openModal('pago', 11999)">INSPECCIONAR</button>
+            </div>
+        </div>
+
+        <h2 class="section-title" style="color: var(--gold);">OFERTA POR TIEMPO LIMITADO</h2>
+        <div class="offer-box">
+            <img src="cofre_oferta.png" class="item-img" style="width: 120px; height: auto; margin-bottom: 15px;">
+            <h3>LOTE DEL COMIENZO</h3>
+            <p style="text-decoration: line-through; color: #888;">Antes: $10.600</p>
+            <p style="font-size: 3rem; color: var(--gold); font-weight: bold; margin: 10px 0;">$9.599 ARS</p>
+            <button class="btn" style="background: var(--gold);" onclick="openModal('pago', 9599)">INSPECCIONAR</button>
+        </div>
+
+        <h2 class="section-title" style="color: #ff00ff;">ENCANTAMIENTO ESPECIAL</h2>
+        <div class="row">
+            <div class="circle circle-large" style="border-color: #ff00ff;">
+                <img src="https://minecraft.wiki/images/Enchanted_Book.gif" class="item-img" style="width: 150px; height: 150px;">
+                <span class="price" style="background: var(--red);">X2 VALOR</span>
+                <span class="price" style="background: #ff00ff; margin-top: 5px;">$2.999 ARS</span>
+            </div>
+            <div style="max-width: 400px;">
+                <h2 style="color: #ff00ff;">MENDING (REPARACIÓN)</h2>
+                <p>Asegura la vida eterna de tus herramientas y armaduras.</p>
+                <button class="btn" style="background: #ff00ff; color: white;" onclick="openModal('pago', 2999)">INSPECCIONAR</button>
+            </div>
+        </div>
+
+        <h2 class="section-title" style="color: var(--dark-red);">RELIQUIA PROHIBIDA</h2>
+        <div class="row reverse">
+            <div class="circle circle-large" style="border-color: var(--dark-red); box-shadow: 0 0 25px var(--dark-red);">
+                <img src="1000619552.webp" class="item-img" style="width: 140px; height: 140px;">
+                <span class="price" style="background: var(--red);">X1.5 VALOR</span>
+                <span class="price" style="background: var(--dark-red); margin-top: 5px;">$999 ARS</span>
+            </div>
+            <div style="max-width: 400px; text-align: right;">
+                <h2 style="color: var(--dark-red); text-shadow: 2px 2px 5px black;">TÓTEM DE LA OSCURIDAD</h2>
+                <p style="color: var(--gold); font-style: italic;">"Un pacto con las sombras para burlar a la muerte."</p>
+                <button class="btn" style="background: var(--dark-red); color: white;" onclick="openModal('pago', 999)">INSPECCIONAR</button>
+            </div>
+        </div>
+
+        <h2 class="section-title">KIT SEMANAL</h2>
+        <div style="text-align: center; padding-bottom: 50px;">
+            <button class="btn" style="padding: 20px 40px; font-size: 1.2rem;" onclick="openModal('semanal', 0)">RECLAMAR CÓDIGO</button>
+        </div>
+
+        <footer>
+            <h2 style="color: var(--acua);">CONTACTO OFICIAL</h2>
+            <div style="margin: 30px 0;">
+                <a href="https://wa.me/5491170674320" class="btn" style="background:#25d366;">WhatsApp</a>
+                <a href="#" class="btn" style="background:#e1306c;">Instagram</a>
+            </div>
+            <p>© 2026 DarkknzzWorld | Epa.gg</p>
+        </footer>
+    </div>
+
+    <div id="modal-sangre" class="modal">
+        <div class="modal-content" style="border-color: var(--red);">
+            <h2 style="color: var(--red);">CONTENIDO KIT</h2>
+            <p id="prices-sangre"></p>
+            <p>• Full Diamante P3<br>• Espada F3 S2 Irr2<br>• 10 Manzanas Oro | 6 Perlas</p>
+            <button class="btn" onclick="openModal('pago', 6499)">COMPRAR AHORA</button>
+            <p onclick="closeAll()" style="cursor:pointer; margin-top:15px; color:#888;">[Cerrar]</p>
+        </div>
+    </div>
+
+    <div id="modal-pago" class="modal">
+        <div class="modal-content">
+            <h2 id="pay-title">MÉTODO DE PAGO</h2>
+            <p id="multi-prices" style="color: var(--acua); font-weight: bold; margin-bottom: 20px;"></p>
+            <p>Alias: <strong>Epa.gg</strong></p>
+            <p>CVU: <strong>0000003100069031171118</strong></p>
+            <a href="https://wa.me/5491170674320" class="btn" style="background:#25d366;">WhatsApp Oficial</a>
+            <p onclick="closeAll()" style="cursor:pointer; margin-top:15px; color:#888;">[Volver]</p>
+        </div>
+    </div>
+
+    <div id="modal-semanal" class="modal">
+        <div class="modal-content" style="border-color: var(--gold);">
+            <h3>RECOMPENSA SEMANAL</h3>
+            <p style="font-size: 1.5rem; color: var(--acua);">Free01Darkzx</p>
+            <p>Expira: 08/03/2026</p>
+            <button class="btn" onclick="closeAll()">CERRAR</button>
+        </div>
+    </div>
+
+    <script>
+        function openModal(id, arsPrice) {
+            closeAll();
+            if(arsPrice > 0) {
+                const usd = (arsPrice / 1000).toFixed(2);
+                const mxn = (usd * 17).toFixed(0);
+                const cop = (usd * 3900).toFixed(0);
+                const priceText = `ARS: $${arsPrice} | USD: $${usd}<br>MXN: $${mxn} | COP: $${cop}`;
+                
+                if(id === 'sangre') document.getElementById('prices-sangre').innerHTML = priceText;
+                if(id === 'pago') document.getElementById('multi-prices').innerHTML = priceText;
+            }
+            document.getElementById('modal-' + id).style.display = 'flex';
+        }
+        function closeAll() {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(m => m.style.display = 'none');
+        }
+        window.onclick = function(event) { if (event.target.className === 'modal') closeAll(); }
+    </script>
+</body>
+</html>
